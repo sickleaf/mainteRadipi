@@ -1,6 +1,20 @@
 # sendStatustoSlack.sh
 
+<<usage>>
+
+## manual
+
 (stdin) | ./sendStatustoSlack.sh
+
+## cron
+
+```
+* * * * * sh -c 'df -h | grep -E "root|mnt" | awk "{print \$(NF-1)\"\t\"\$2\"\t\"\$3\"\t\"\$NF\"\t\t\"\$1}" | /home/radipi/repository/myMainte/sendStatustoSlack.sh'
+```
+
+in awk statement, escape `$` and `"`
+then, quote awk statement with **double-quotation** (not single quotation)
+
 
 ```
 $ df -h | grep -E "root|mnt" | awk '{print $(NF-1)"\t"$2"\t"$3"\t"$NF"\t\t"$1}' |  ./sendStatustoSlack.sh
