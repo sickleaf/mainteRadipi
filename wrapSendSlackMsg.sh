@@ -5,10 +5,12 @@ tmp=/tmp/$$
 makeMsgScript=$1
 sendMsgScript=sendStatustoSlack.sh
 
+cmds=`echo "$*"`
+
 cd $(dirname $0)
 
 if [ -f ${makeMsgScript} ];then
-	bash ${makeMsgScript} > ${tmp}-execLog
+	bash ${cmds} > ${tmp}-execLog
 	cat ${tmp}-execLog | bash ${sendMsgScript}
 fi
 
