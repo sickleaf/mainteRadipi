@@ -6,7 +6,7 @@ nowDate=`LANG=C; date '+%b %d %H:%M'` # Sep 12 23:42
 
 cat /var/log/cron.log{,.1} | # check cron.log || cron.log.1
 sed -e 's/ \+/ /g' | # remove successive spaces
-grep " ${filterJob}" | # filter jobName
+grep "${filterJob}" | # filter jobName
 tail -"${filterNum}" | # filter last N log
 awk -F'(' '{print $1, $3}' |  # extract TIME,JOB from cron.log
 cut -d" " -f 1-3,6- | # remove "raspberrypi CRON [PID]:"
