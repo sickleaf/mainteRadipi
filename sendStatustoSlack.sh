@@ -2,10 +2,11 @@
 
 # http://vdeep.net/shellscript-slack
 
+channelFILE=$1
 MSGFILE=$(mktemp -t webhookXXXX)
 trap "rm ${MSGFILE}" 0
 
-source "$(dirname $0)/slackWebhookInfo"
+source "$(dirname $0)/${channelFILE}"
 
 if [ -p /dev/stdin ]; then
 	cat - | tr '\n' '\\' | sed 's/\\/\\n/g' > ${MSGFILE}
