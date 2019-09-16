@@ -4,7 +4,7 @@ filterJob=$1
 filterNum=$2
 nowDate=`LANG=C; date '+%b %d %H:%M'` # Sep 12 23:42
 
-cat /var/log/cron.log{,.1} | # check cron.log || cron.log.1
+cat /var/log/cron.log{.1,} | # check both cron.log.1 AND cron.log
 sed -e 's/ \+/ /g' | # remove successive spaces
 grep "${filterJob}" | # filter jobName
 tail -"${filterNum}" | # filter last N log
