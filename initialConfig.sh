@@ -5,7 +5,7 @@ scriptDir=$(cd $(dirname $0); pwd);
 configFile=${scriptDir}/systemConfig
 
 if [ ! -f ${configFile} ]; then
-        echo "" > ${configFile}
+        echo "mail=" > ${configFile}
 fi
 
 echo "systemConfig: ${configFile}"
