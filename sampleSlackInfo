@@ -1,0 +1,8 @@
+ # webhook URL
+URL=""
+# dst-channel
+CHANNEL=${CHANNEL:-'#sampleChannel'}
+# botname
+BOTNAME=${BOTNAME:-'sampleChannel'}
+# heading
+HEAD=${HEAD:-"HEAD Message\n"}
