@@ -1,7 +1,14 @@
-#!/bin/bash -eu
+#!/bin/bash
 
 DFTMP=/tmp/$$
-storageID=$1
+
+if [ $# -ge 1 ]; then
+	storageID=$1
+	slackCh=$2
+fi
+
+maintePass=/home/radipi/repository/mainteRadipi
+sendSlack=${maintePass}/sendStatustoSlack.sh
 
 bash -c 'df -h | grep -E "/$" | awk "{print  \"[systemStorage]\t\" \$(NF-1)   \" \" \$3 \"->\"  \$2  \"\t\t\" \$NF}"' > $DFTMP-system
 
@@ -14,5 +21,8 @@ cat $DFTMP-system
 cat $DFTMP-mount
 cat $DFTMP-storage
 
-rm -f $DFTMP-*
+if [ ! -z "${slackCh}" ]; then
+	cat $DFTMP-system $DFTMP-mount $DFTMP-storage | ${sendSlack} ${slackCh}
+fi
 
+rm -f $DFTMP-*
